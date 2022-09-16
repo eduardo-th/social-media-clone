@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
+const mongoose = require('mongoose');
 
 const app = express();
 
@@ -20,6 +21,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+const dbUrl = 'mongodb://localhost:27017/social-media';
+mongoose.connect(dbUrl);
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'Connection Error'));
+db.once('open', () => {
+  console.log('Database Connected');
+});
 
 const PORT = 3000;
 app.listen(PORT, () => {
