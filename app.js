@@ -22,10 +22,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-const dbUrl = 'mongodb://localhost:27017/social-media';
-mongoose.connect(dbUrl);
+const dbUrl = 'mongodb://localhost:27017/socialMedia';
+mongoose.connect(dbUrl).catch((err) => console.log(`mongo connection error ${err}`));
+
 const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'Connection Error'));
+db.on('error', (err) => {
+  console.log(`mongo error ${err}`);
+});
 db.once('open', () => {
   console.log('Database Connected');
 });
