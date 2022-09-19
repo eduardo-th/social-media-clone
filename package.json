@@ -3,10 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "seed":"node seed/seed.js",
+    "seed": "node seed/seed.js",
     "start": "node app.js"
   },
   "dependencies": {
+    "bootstrap": "^5.2.1",
     "cookie-parser": "^1.4.6",
     "debug": "~2.6.9",
     "ejs": "~2.6.1",

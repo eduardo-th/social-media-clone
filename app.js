@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const app = express();
 
 const indexRouter = require('./routes/index');
+const postsRouter = require('./routes/posts');
 const usersRouter = require('./routes/users');
 
 app.set('views', path.join(__dirname, 'views'));
@@ -21,6 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/posts',postsRouter)
 
 const dbUrl = 'mongodb://localhost:27017/socialMedia';
 mongoose.connect(dbUrl).catch((err) => console.log(`mongo connection error ${err}`));
