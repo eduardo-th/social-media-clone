@@ -11,5 +11,10 @@ router.get('/:id', async (req, res) => {
   const foundPost = await Post.findById(id);
   res.render('posts/show', { foundPost });
 });
-
+router.get('/:id/edit', async (req, res) => {
+  const { id } = req.params;
+  const foundPost = await Post.findById(id);
+  console.log(foundPost);
+  res.render('posts/edit', { foundPost });
+});
 module.exports = router;
