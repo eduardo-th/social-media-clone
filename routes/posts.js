@@ -31,6 +31,19 @@ router.post('/', async (req, res) => {
   await postDoc.save();
   res.redirect('/');
 });
+router.patch('/:id', async (req, res) => {
+  const { id } = req.params;
+  const { title, body, tags } = req.body;
+  const editedPost = {
+    title,
+    body,
+    tags: tags.split(' '),
+    //get user id from session
+    //multer image
+  };
+  const foundDoc = await Post.findByIdAndUpdate(id, editedPost);
+  res.redirect(`/posts/${id}`);
+});
 router.delete('/:id', async (req, res) => {
   const { id } = req.params;
   const foundDoc = await Post.findByIdAndDelete(id);
