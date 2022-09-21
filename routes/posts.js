@@ -31,4 +31,10 @@ router.post('/', async (req, res) => {
   await postDoc.save();
   res.redirect('/');
 });
+router.delete('/:id', async (req, res) => {
+  const { id } = req.params;
+  const foundDoc = await Post.findByIdAndDelete(id);
+
+  res.redirect('/');
+});
 module.exports = router;
