@@ -1,3 +1,4 @@
+require('dotenv').config();
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -22,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/posts',postsRouter)
+app.use('/posts', postsRouter);
 
 const dbUrl = 'mongodb://localhost:27017/socialMedia';
 mongoose.connect(dbUrl).catch((err) => console.log(`mongo connection error ${err}`));
