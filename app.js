@@ -5,8 +5,25 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const session = require('express-session');
 
 const app = express();
+
+const sessionConfig = {
+  name: 'sessid',
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  //store: change to mongo for deploy
+  saveUninitialized: true,
+  cookie: {
+    secure: false,
+    httpOnly: true,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+  },
+};
+if (process.env.NODE_ENV === 'production') {
+  sessionConfig.cookie.secure = true;
+}
 
 const indexRouter = require('./routes/index');
 const postsRouter = require('./routes/posts');
@@ -20,6 +37,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session(sessionConfig));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
