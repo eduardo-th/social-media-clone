@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <h1>show</h1>
-  </body>
-</html>
+<% layout('./layout/boilerplate') -%> <% const {title,body,author,image}=foundPost %>
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="card col-6">
+      <img src="<%=image.url%>" class="img-fluid card-img-top" alt="..." />
+      <div class="card-body">
+        <h5 class="card-title"><%= title %></h5>
+        <p class="card-text"><%= body %></p>
+      </div>
+    </div>
+  </div>
+</div>
