@@ -1,12 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <h1>edit</h1>
-  </body>
-</html>
+<% layout('./layout/boilerplate') -%><% const {id,title,body,author,image,tags}=foundPost %>
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <form class="col-6" action="/posts/<%=id%>" method="POST">
+      <label class="form-label mb-1" for="title">Title</label>
+      <input class="form-control" type="text" name="title" id="title" value="<%= title %> " />
+      <label class="form-label mb-1" for="body">Body</label>
+      <textarea class="form-control" name="body" id="body" cols="30" rows="3">
+        <%= body %></textarea
+      >
+      <label class="form-label mb-1" for="image">Image</label>
+      <input class="form-control" type="file" name="image" id="image" />
+      <label class="form-label mb-1" for="tags">Add Tags</label>
+      <input class="form-control" type="text" name="tags" id="tags" value="<%= tags %> " />
+
+      <div class="d-grid gap-2">
+        <button class="btn btn-success mt-1">Edit</button>
+      </div>
+    </form>
+  </div>
+</div>
