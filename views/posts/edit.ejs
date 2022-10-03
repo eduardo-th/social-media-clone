@@ -1,7 +1,7 @@
 <% layout('./layout/boilerplate') -%><% const {id,title,body,author,image,tags}=foundPost %>
 <div class="container-fluid">
   <div class="row justify-content-center">
-    <form class="col-6" action="/posts/<%=id%>" method="POST">
+    <form class="col-6" action="/posts/<%=id%>?_method=PATCH" method="POST">
       <label class="form-label mb-1" for="title">Title</label>
       <input class="form-control" type="text" name="title" id="title" value="<%= title %> " />
       <label class="form-label mb-1" for="body">Body</label>
