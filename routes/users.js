@@ -24,5 +24,13 @@ router.post(
     res.redirect('/posts');
   }
 );
+router.post('/logout', (req, res) => {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect('/');
+  });
+});
 
 module.exports = router;
