@@ -9,13 +9,18 @@ router.get('/', function (req, res, next) {
 router.get('/login', (req, res) => {
   res.render('users/login');
 });
-
 router.post('/', async (req, res) => {
   const { username, password, email } = req.body;
   const userDoc = new User({ username, email });
-  await User.register(userDoc, password);
 
-  res.redirect('/');
+  const registeredUser = await User.register(userDoc, password);
+
+  req.login(registeredUser, function (err) {
+    if (err) {
+      return next(err);
+    }
+    return res.redirect('/');
+  });
 });
 router.post(
   '/login',
