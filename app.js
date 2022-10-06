@@ -58,6 +58,13 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+app.use((req, res, next) => {
+  res.locals.user = req.user;
+  res.locals.error = req.flash('error');
+  res.locals.success = req.flash('success');
+  next();
+});
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);

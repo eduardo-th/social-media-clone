@@ -1,19 +1,20 @@
 <% layout('./layout/boilerplate') -%>
 <div class="container-fluid">
   <div class="row justify-content-center">
-    <form class="col-6" action="/posts" method="POST">
-      <label class="form-label mb-1" for="title">Title</label>
-      <input class="form-control" type="text" name="title" id="title" />
-      <label class="form-label mb-1" for="body">Body</label>
-      <textarea class="form-control" name="body" id="body" cols="30" rows="3"></textarea>
-      <label class="form-label mb-1" for="image">Image</label>
-      <input class="form-control" type="file" name="image" id="image" />
-      <label class="form-label mb-1" for="tags">Add Tags</label>
-      <input class="form-control" type="text" name="tags" id="tags" />
-
-      <div class="d-grid gap-2">
-        <button class="btn btn-success mt-1">Send</button>
-      </div>
-    </form>
+    <div class="col-6">
+      <form action="/posts" method="POST">
+        <label class="form-label mb-1" for="title">Title</label>
+        <input class="form-control" type="text" name="title" id="title" />
+        <label class="form-label mb-1" for="body">Body</label>
+        <textarea class="form-control" name="body" id="body" cols="30" rows="3"></textarea>
+        <label class="form-label mb-1" for="image">Image</label>
+        <input class="form-control" type="file" name="image" id="image" />
+        <label class="form-label mb-1" for="tags">Add Tags</label>
+        <input class="form-control" type="text" name="tags" id="tags" />
+        <div class="d-grid gap-2">
+          <button class="btn btn-success mt-1">Send</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>

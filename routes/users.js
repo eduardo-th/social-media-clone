@@ -24,8 +24,12 @@ router.post('/', async (req, res) => {
 });
 router.post(
   '/login',
-  passport.authenticate('local', { failureRedirect: '/', failureMessage: true }),
+  passport.authenticate('local', {
+    failureFlash: true,
+    failureRedirect: '/users/login',
+  }),
   (req, res) => {
+    req.flash('success', `Welcome back ${req.body.username}`);
     res.redirect('/posts');
   }
 );
