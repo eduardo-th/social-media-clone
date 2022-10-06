@@ -9,6 +9,7 @@ const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const methodOverride = require('method-override');
+const flash = require('connect-flash');
 
 const User = require('./models/user');
 
@@ -47,6 +48,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session(sessionConfig));
+app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.authenticate('session')); // == app.use(passport.session());
