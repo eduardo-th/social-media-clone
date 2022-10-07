@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema, model } = mongoose;
+const Comment=require('./comment')
 
 const options = { timestamps: true };
 

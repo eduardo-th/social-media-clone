@@ -1,4 +1,4 @@
-<% layout('./layout/boilerplate') -%> <% const {title,body,author,image}=foundPost %>
+<% layout('./layout/boilerplate') -%> <% const {title,body,author,image,comments}=foundPost %>
 <div class="container-fluid">
   <div class="row justify-content-center">
     <div class="card col-6">
@@ -8,5 +8,21 @@
         <p class="card-text"><%= body %></p>
       </div>
     </div>
+  </div>
+</div>
+<div class="row justify-content-center mt-2">
+  <div class="col-6 bg-secondary bg-opacity-25 p-2 rounded" id="comment-container">
+    <% for(let comment of comments){ %>
+    <div class="card">
+      <div class="card-body p-2">
+        <h6 class="card-title"><%= comment.author.username %></h6>
+        <p class="card-text"><%= comment.body %></p>
+        <div class="row mb-0 text-muted">
+          <div class="col-auto">like placeholder</div>
+          <div class="ms-auto col-auto"><%= comment.createdAt.toString().split(' GMT')[0] %></div>
+        </div>
+      </div>
+    </div>
+    <% } %>
   </div>
 </div>

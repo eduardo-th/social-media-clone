@@ -11,7 +11,11 @@ router.get('/new', (req, res) => {
 });
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
-  const foundPost = await Post.findById(id);
+  const foundPost = await Post.findById(id).populate({
+    path: 'comments',
+    populate: { path: 'author', select: 'username -_id', ref: 'User' },
+  });
+  
   res.render('posts/show', { foundPost });
 });
 router.get('/:id/edit', async (req, res) => {
