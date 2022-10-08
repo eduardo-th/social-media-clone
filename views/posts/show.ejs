@@ -19,7 +19,10 @@
                 aria-expanded="false"></button>
               <ul class="dropdown-menu py-0">
                 <li><a class="rounded-top dropdown-item bg-success" 
-                  href="<%=`/posts/${id}/edit`%> ">Edit</a></li>                
+                  href="/posts/<%=id%>/edit">Edit</a></li>                   
+                <form action="/posts/<%=id%>?_method=DELETE" method="POST">
+                <li><button class="rounded-bottom dropdown-item bg-danger">Delete</button></li>
+                </form>                     
               </ul>
             </div>
           </div>
