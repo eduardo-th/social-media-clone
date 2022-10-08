@@ -1,15 +1,34 @@
-<% layout('./layout/boilerplate') -%> <% const {title,body,author,image,comments}=foundPost %>
+<% layout('./layout/boilerplate') -%> <% const {id,title,body,author,image,comments}=foundPost %>
 <div class="container-fluid">
   <div class="row justify-content-center">
-    <div class="card col-6">
-      <img src="<%=image.url%>" class="img-fluid card-img-top" alt="..." />
-      <div class="card-body">
-        <h5 class="card-title"><%= title %></h5>
-        <p class="card-text"><%= body %></p>
+    <div class="col-6">
+      <div class="card">
+        <img src="<%=image.url%>" class="img-fluid card-img-top" alt="..." />
+        <div class="card-body">
+          <h5 class="card-title"><%= title %></h5>
+          <p class="card-text"><%= body %></p>
+        </div>
+        <div class="card-footer">
+          <div class="row">
+            <div class="col-auto lh-lg">like placeholder</div>
+            <div class="ms-auto col-auto btn-group dropup">
+              <button
+                type="button"
+                class="btn btn-info dropdown-toggle"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"></button>
+              <ul class="dropdown-menu py-0">
+                <li><a class="rounded-top dropdown-item bg-success" 
+                  href="<%=`/posts/${id}/edit`%> ">Edit</a></li>                
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
 <div class="row justify-content-center mt-2">
   <div class="col-6 bg-secondary bg-opacity-25 p-2 rounded" id="comment-container">
     <% for(let comment of comments){ %>
