@@ -41,7 +41,7 @@
         <p class="card-text"><%= comment.body %></p>
         <div class="row mb-0 text-muted">
           <div class="col-auto">like placeholder</div>
-          <div class="ms-auto col-auto"><%= comment.createdAt.toString().split(' GMT')[0] %></div>
+          <div class="ms-auto col-auto"><%= comment.createdAt.toDateString() %></div>
         </div>
       </div>
     </div>
