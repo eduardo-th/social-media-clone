@@ -3,6 +3,7 @@ const router = express.Router();
 const Post = require('../models/post');
 const middlewares=require('../middlewares')
 
+
 router.get('/', async (req, res) => {
   const foundPost = await Post.find().limit(10).sort({ createdAt: -1 });
   res.render('posts/index', { foundPost });
@@ -24,7 +25,7 @@ router.get('/:id/edit',middlewares.isLoggedIn, async (req, res) => {
   const foundPost = await Post.findById(id);
   res.render('posts/edit', { foundPost });
 });
-router.post('/', middlewares.isLoggedIn,async (req, res) => {
+router.post('/',middlewares.validatePost, middlewares.isLoggedIn,async (req, res) => {
   const { title, body, tags } = req.body;
   const postDoc = new Post({
     title,
