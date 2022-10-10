@@ -11,7 +11,7 @@ router.post('/', async (req, res) => {
   const foundPost = await Post.findById(id);
   foundPost.comments.push(commentDoc);
 
-  Promise.all([commentDoc.save(), foundPost.save()]);
+  await Promise.all([commentDoc.save(), foundPost.save()]);
 
   req.flash('success', 'Comment created');
   res.redirect(`/posts/${id}`);
