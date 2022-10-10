@@ -1,10 +1,11 @@
 const express = require('express');
 const Post = require('../models/post');
 const Comment = require('../models/comment');
+const middlewares = require('../middlewares');
 
 const router = express.Router({ mergeParams: true });
 
-router.post('/', async (req, res) => {
+router.post('/', middlewares.isLoggedIn, async (req, res) => {
   const { id } = req.params;
 
   const commentDoc = new Comment({ author: req.user._id, body: req.body.body });
@@ -17,7 +18,7 @@ router.post('/', async (req, res) => {
   res.redirect(`/posts/${id}`);
 });
 
-router.delete('/:commentId', async (req, res) => {
+router.delete('/:commentId', middlewares.isLoggedIn, async (req, res) => {
   const { id, commentId } = req.params;
 
   const deleteCommentPost = Post.findByIdAndUpdate(
