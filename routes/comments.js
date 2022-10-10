@@ -17,4 +17,20 @@ router.post('/', async (req, res) => {
   res.redirect(`/posts/${id}`);
 });
 
+router.delete('/:commentId', async (req, res) => {
+  const { id, commentId } = req.params;
+
+  const deleteCommentPost = Post.findByIdAndUpdate(
+    id,
+    { $pull: { comments: commentId } },
+    { new: true }
+  ).exec();
+  const deleteComment = Comment.findByIdAndDelete(commentId).exec();
+
+  await Promise.all([deleteComment, deleteCommentPost]);
+
+  req.flash('success', 'Comment deleted');
+  res.redirect(`/posts/${id}`);
+});
+
 module.exports = router;
