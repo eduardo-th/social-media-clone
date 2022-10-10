@@ -34,6 +34,7 @@ if (process.env.NODE_ENV === 'production') {
 const indexRouter = require('./routes/index');
 const postsRouter = require('./routes/posts');
 const usersRouter = require('./routes/users');
+const commentsRouter = require('./routes/comments');
 
 const engine = require('ejs-mate');
 app.engine('ejs', engine);
@@ -68,6 +69,7 @@ app.use((req, res, next) => {
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
+app.use('/posts/:id/comments', commentsRouter);
 
 const dbUrl = 'mongodb://localhost:27017/socialMedia';
 mongoose.connect(dbUrl).catch((err) => console.log(`mongo connection error ${err}`));
