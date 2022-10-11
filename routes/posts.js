@@ -21,6 +21,7 @@ router.get('/:id', async (req, res) => {
   if (req.user) {
     userComment = foundPost.comments.find((elem) => elem.author._id.equals(req.user._id));
   }  
+  res.render('posts/show', { foundPost,userComment });
 });
 router.get('/:id/edit', middlewares.isLoggedIn, async (req, res) => {
   const { id } = req.params;
