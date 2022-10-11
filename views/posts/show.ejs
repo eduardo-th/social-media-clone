@@ -34,17 +34,31 @@
 
 <div class="row justify-content-center mt-2">
   <div class="col-6 bg-secondary bg-opacity-25 p-2 rounded" id="comment-container">
-    <% for(let comment of comments){ %>
-    <div class="card">
-      <div class="card-body p-2">
-        <h6 class="card-title"><%= comment.author.username %></h6>
-        <p class="card-text"><%= comment.body %></p>
-        <div class="row mb-0 text-muted">
-          <div class="col-auto">like placeholder</div>
-          <div class="ms-auto col-auto"><%= comment.createdAt.toDateString() %></div>
+    <% if(userComment) {%> 
+      <div class="card border border-primary border-2">
+        <div class="card-body p-2">
+          <h6 class="card-title"><%= userComment.author.username %></h6>
+          <p class="card-text"><%= userComment.body %></p>
+          <div class="row mb-0 text-muted">
+            <div class="col-auto">like placeholder</div>
+            <div class="ms-auto col-auto"><%= userComment.createdAt.toDateString() %></div>
+          </div>
         </div>
       </div>
-    </div>
+      <% } %>
+    <% for(let comment of comments){ %>
+        <%if (!(userComment && userComment._id.equals(comment._id))) { %> 
+          <div class="card">
+            <div class="card-body p-2">
+              <h6 class="card-title"><%= comment.author.username %></h6>
+              <p class="card-text"><%= comment.body %></p>
+              <div class="row mb-0 text-muted">
+                <div class="col-auto">like placeholder</div>
+                <div class="ms-auto col-auto"><%= comment.createdAt.toDateString() %></div>
+              </div>
+            </div>
+          </div>  
+      <% } %>       
     <% } %>
   </div>
 </div>
