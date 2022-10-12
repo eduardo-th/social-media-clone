@@ -18,6 +18,18 @@ router.post('/', middlewares.isLoggedIn, async (req, res) => {
   res.redirect(`/posts/${id}`);
 });
 
+router.put('/:commentId', async(req,res)=>{
+  const {id,commentId}=req.params
+  const {body}=req.body
+
+  const foundComment=await Comment.findByIdAndUpdate(commentId,{body},{new:true})
+
+
+
+  req.flash('success', 'Comment edited');
+  res.redirect(`/posts/${id}`);
+})
+
 router.delete('/:commentId', middlewares.isLoggedIn, async (req, res) => {
   const { id, commentId } = req.params;
 
