@@ -18,7 +18,7 @@ router.post('/', middlewares.isLoggedIn, async (req, res) => {
   res.redirect(`/posts/${id}`);
 });
 
-router.put('/:commentId', async (req, res) => {
+router.put('/:commentId',middlewares.isLoggedIn, async (req, res) => {
   const { id, commentId } = req.params;
   const { body } = req.body;
 
