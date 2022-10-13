@@ -35,26 +35,7 @@
 <div class="row justify-content-center mt-2">
   <div class="col-6 bg-secondary bg-opacity-25 p-2 rounded" id="comment-container">
     <% if(userComment) {%> 
-      <div class="card border border-primary border-2">
-        <div class="card-body p-2">
-          <h6 class="card-title"><%= userComment.author.username %> - <%= userComment.createdAt.toDateString() %></h6>
-          <form action="/posts/<%=id%>/comments/<%=userComment.id%>?_method=PUT" method="POST">
-          <textarea class="card-text mb-1" name="body" id="body" cols="50" rows="3"><%= userComment.body %></textarea>          
-          <div class="row mb-0 text-muted">
-            <div class="col-auto lh-lg">like placeholder</div>
-            <div class="ms-auto col-auto">
-              <div class="ms-auto col-auto btn-group dropup"> 
-                  <button class="btn btn-sm p-1 btn-success">Edit</button>
-                  </form>                                                       
-                  <form action="/posts/<%=id%>/comments/<%=userComment.id%>?_method=DELETE" method="POST">
-                  <button class="btn btn-sm p-1 btn-danger">Delete</button>
-                  </form>                     
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <%- include('../partials/usercomment',{userComment,id}) %> 
       <% } %>
     <% for(let comment of comments){ %>
         <%if (!(userComment && userComment._id.equals(comment._id))) { %> 
