@@ -39,16 +39,7 @@
       <% } %>
     <% for(let comment of comments){ %>
         <%if (!(userComment && userComment._id.equals(comment._id))) { %> 
-          <div class="card">
-            <div class="card-body p-2">
-              <h6 class="card-title"><%= comment.author.username %></h6>
-              <p class="card-text"><%= comment.body %></p>
-              <div class="row mb-0 text-muted">
-                <div class="col-auto">like placeholder</div>
-                <div class="ms-auto col-auto"><%= comment.createdAt.toDateString() %></div>
-              </div>
-            </div>
-          </div>  
+          <%- include('../partials/comment',{comment}) %> 
       <% } %>       
     <% } %>
   </div>
