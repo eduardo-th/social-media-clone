@@ -11,6 +11,9 @@ const LocalStrategy = require('passport-local');
 const methodOverride = require('method-override');
 const flash = require('connect-flash');
 
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
+
 const User = require('./models/user');
 
 const app = express();
