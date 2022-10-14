@@ -11,6 +11,7 @@ const LocalStrategy = require('passport-local');
 const methodOverride = require('method-override');
 const flash = require('connect-flash');
 
+const cloudinary = require('cloudinary').v2
 const multer  = require('multer')
 const upload = multer({ dest: 'uploads/' })
 

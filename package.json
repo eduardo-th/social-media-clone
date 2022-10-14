@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "bootstrap": "^5.2.1",
+    "cloudinary": "^1.32.0",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.6",
     "debug": "~2.6.9",
