@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const { Schema, model } = mongoose;
-const Comment=require('./comment')
+const Comment = require('./comment');
 
-const options = { timestamps: true };
+const options = { timestamps: true, toObject: { virtuals: true }, toJSON: { virtuals: true } };
 
 const postSchema = new Schema(
   {
@@ -26,6 +26,12 @@ const postSchema = new Schema(
   },
   options
 );
+postSchema.virtual('image.thumbnail').get(function () {
+  if (!this.image.url) {
+    return '';
+  }
+  return this.image.url.replace('/upload', '/upload/c_thumb,g_center,h_250,w_250');
+});
 
 const Post = model('Post', postSchema);
 
