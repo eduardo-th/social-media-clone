@@ -60,6 +60,9 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
+  if (req.originalUrl !== '/users/login') {
+    req.session.previusUrl = req.originalUrl;
+  }
   res.locals.user = req.user;
   res.locals.error = req.flash('error');
   res.locals.success = req.flash('success');

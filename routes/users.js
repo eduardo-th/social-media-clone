@@ -27,10 +27,12 @@ router.post(
   passport.authenticate('local', {
     failureFlash: true,
     failureRedirect: '/users/login',
+    keepSessionInfo: true,
   }),
   (req, res) => {
+    const redirectUrl = req.session.previusUrl || '/posts';
     req.flash('success', `Welcome back ${req.body.username}`);
-    res.redirect('/posts');
+    res.redirect(redirectUrl);
   }
 );
 router.post('/logout', (req, res) => {
