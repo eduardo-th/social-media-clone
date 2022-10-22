@@ -11,20 +11,23 @@
         <div class="card-footer">
           <div class="row">
             <div class="col-auto lh-lg">like placeholder</div>
-            <div class="ms-auto col-auto btn-group dropup">
-              <button
-                type="button"
-                class="btn btn-info dropdown-toggle"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"></button>
-              <ul class="dropdown-menu py-0">
-                <li><a class="rounded-top dropdown-item bg-success" 
-                  href="/posts/<%=id%>/edit">Edit</a></li>                   
-                <form action="/posts/<%=id%>?_method=DELETE" method="POST">
-                <li><button class="rounded-bottom dropdown-item bg-danger">Delete</button></li>
-                </form>                     
-              </ul>
-            </div>
+            <% if(user && (user._id.equals(author))) {%>               
+              <div class="ms-auto col-auto btn-group dropup">
+                <button
+                  type="button"
+                  class="btn btn-info dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"></button>
+                <ul class="dropdown-menu py-0">
+                  <li><a class="rounded-top dropdown-item bg-success" 
+                    href="/posts/<%=id%>/edit">Edit</a></li>                   
+                  <form action="/posts/<%=id%>?_method=DELETE" method="POST">
+                  <li><button class="rounded-bottom dropdown-item bg-danger">Delete</button></li>
+                  </form>                                     
+                </ul>
+              </div>
+            <% } %> 
+
           </div>
         </div>
       </div>
