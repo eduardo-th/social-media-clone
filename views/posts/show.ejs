@@ -5,13 +5,14 @@
       <div class="card">
         <img src="<%=image.url%>" class="img-fluid card-img-top" alt="..." />
         <div class="card-body">
+          <h5 class="card-title fs-6"><a href="#"><%= author.username %></a></h5>
           <h5 class="card-title"><%= title %></h5>
           <p class="card-text"><%= body %></p>
         </div>
         <div class="card-footer">
           <div class="row">
             <div class="col-auto lh-lg">like placeholder</div>
-            <% if(user && (user._id.equals(author))) {%>               
+            <% if(user && (user._id.equals(author._id))) {%>               
               <div class="ms-auto col-auto btn-group dropup">
                 <button
                   type="button"

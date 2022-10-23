@@ -14,10 +14,12 @@ router.get('/new', middlewares.isLoggedIn, (req, res) => {
 router.get('/:id', async (req, res) => {
   let userComment = null;
   const { id } = req.params;
-  const foundPost = await Post.findById(id).populate({
-    path: 'comments',
-    populate: { path: 'author', select: 'username', ref: 'User' },
-  });
+  const foundPost = await Post.findById(id)
+    .populate('author', 'username')
+    .populate({
+      path: 'comments',
+      populate: { path: 'author', select: 'username', ref: 'User' },
+    });
 
   if (req.user) {
     userComment = foundPost.comments.find((elem) => elem.author._id.equals(req.user._id));
