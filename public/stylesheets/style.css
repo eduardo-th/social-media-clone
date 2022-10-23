@@ -1,5 +1,6 @@
 a {
   color: #00b7ff;
+  text-decoration: none;
 }
 .crop-text-4lines {
   -webkit-line-clamp: 4;
