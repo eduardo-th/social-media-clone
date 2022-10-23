@@ -2,7 +2,7 @@
     <div class="card-body p-2">
       <h6 class="card-title"><%= userComment.author.username %> - <%= userComment.createdAt.toDateString() %></h6>
       <form action="/posts/<%=id%>/comments/<%=userComment.id%>?_method=PUT" method="POST">
-      <textarea class="card-text mb-1" name="body" id="body" cols="50" rows="3"><%= userComment.body %></textarea>          
+      <textarea class="form-control card-text mb-1" name="body" id="body" cols="50" rows="3"><%= userComment.body %></textarea>          
       <div class="row mb-0 text-muted">
         <div class="col-auto lh-lg">like placeholder</div>
         <div class="ms-auto col-auto">
