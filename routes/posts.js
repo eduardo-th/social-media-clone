@@ -41,8 +41,6 @@ router.post(
       url: req.file.path,
       filename: req.file.filename,
     };
-    console.log(req.body);
-    console.log(req.file);
     const postDoc = new Post({
       title,
       body,
