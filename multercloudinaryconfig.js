@@ -13,13 +13,21 @@ cloudinary.config({
 const multerStorage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: 'social-media/posts',
+    folder: (req, file) =>{
+      if (req.originalUrl.includes('posts')){
+        return 'social-media/posts'
+      }
+      return 'social-media/avatars'
+    },
     allowed_formats: ['jpg', 'png', 'jpeg'],
     eager: (req, file) => {
-      return { gravity: 'center', height: 250, width: 250, crop: 'thumb' };
+      if (req.originalUrl.includes('posts')){
+        return { gravity: 'center', height: 250, width: 250, crop: 'thumb' };
+      }
+      return {gravity: "center", height: 250, radius: "max", width: 250, crop: "crop"}     
     },
   },
-  //avatar  {height: 50, radius: 50, width: 50, crop: "fill"}
+  //avatar  {gravity: "center", height: 250, radius: "max", width: 250, crop: "crop"}
   //thum    {gravity: "center", height: 250, width: 250, crop: "thumb"}
 });
 const fileFilter = (req, file, cb) => {
