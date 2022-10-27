@@ -1,0 +1,26 @@
+<% layout('./layout/boilerplate') -%>
+<div class="container-fluid mt-2">
+  <div class="row">
+    <div class="col-2 offset-1 border-end border-dark border-opacity-25">
+      <ul class="nav flex-column text-center">        
+        <img class="img-fluid" src="https://res.cloudinary.com/dqfvb6su5/image/upload/c_crop,g_center,h_250,r_max,w_250/v1666646440/social-media/avatars/j44u534bvg0kfufbptqt.jpg" alt="">
+        <li class="nav-item my-1">
+          <a class="nav-link d-inline" href="#">My posts</a>
+        </li>
+        <li class="nav-item my-1">
+          <a class="nav-link d-inline" href="#">Followers</a>
+        </li>
+        <li class="nav-item my-1">
+          <a class="nav-link d-inline" href="#">Following</a>
+        </li>        
+        <li class="nav-item my-1">
+          <a class="nav-link d-inline" href="#">Follow user</a>
+        </li>        
+      </ul>
+    </div>
+    <div class="col-8">
+      <h1 ><%= foundUser.username %></h1>
+      <p><%= foundUser.about %> </p>      
+    </div>
+  </div>
+</div>

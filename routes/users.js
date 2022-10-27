@@ -9,6 +9,12 @@ router.get('/', function (req, res, next) {
 router.get('/login', (req, res) => {
   res.render('users/login');
 });
+router.get('/:id', async (req,res)=>{
+  const {id}=req.params
+  const foundUser= await User.findById(id)  
+
+  res.render('users/show',{foundUser})
+})
 router.post('/', async (req, res) => {
   const { username, password, email } = req.body;
   const userDoc = new User({ username, email });
