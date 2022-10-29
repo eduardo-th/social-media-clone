@@ -11,7 +11,7 @@ router.get('/login', (req, res) => {
   res.render('users/login');
 });
 router.get('/:id', async (req, res) => {
-  const { id } = req.params;  
+  const { id } = req.params;
 
   const foundUser = await User.findById(id);
 
@@ -28,12 +28,7 @@ router.patch('/:id', upload.single('image'), async (req, res) => {
     filename: req.file.filename,
   };
 
-  const foundUser = await User.findByIdAndUpdate(id, { about, avatar },{new:true});
-
-  console.log('-*-*PARAMS-*-*', req.params);
-  console.log('-*-*BODY-*-*', req.body);
-  console.log('-*-*FILE-*-*', req.file);
-  console.log('-*-*FOUND USER-*-*', foundUser);
+  const foundUser = await User.findByIdAndUpdate(id, { about, avatar }, { new: true });
 
   res.redirect(`/users/${id}`);
 });
