@@ -13,33 +13,34 @@ cloudinary.config({
 const multerStorage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: (req, file) =>{
-      if (req.originalUrl.includes('posts')){
-        return 'social-media/posts'
+    folder: (req, file) => {
+      if (req.originalUrl.includes('posts')) {
+        return 'social-media/posts';
       }
-      return 'social-media/avatars'
+      return 'social-media/avatars';
     },
     allowed_formats: ['jpg', 'png', 'jpeg'],
     eager: (req, file) => {
-      if (req.originalUrl.includes('posts')){
+      if (req.originalUrl.includes('posts')) {
         return { gravity: 'center', height: 250, width: 250, crop: 'thumb' };
       }
-      return {gravity: "center", height: 250, radius: "max", width: 250, crop: "crop"}     
+      return {gravity: "faces", height: 250, radius: "max", width: 250, crop: "fill"};
     },
   },
   //avatar  {gravity: "center", height: 250, radius: "max", width: 250, crop: "crop"}
   //thum    {gravity: "center", height: 250, width: 250, crop: "thumb"}
 });
 const fileFilter = (req, file, cb) => {
-  const { title, body } = req.body;
+  if (req.originalUrl.includes('posts')) {
+    const { title, body } = req.body;
 
-  const validation = postValidSchema.validate({ title, body });
+    const validation = postValidSchema.validate({ title, body });
 
-  if (!validation.error) {
-    cb(null, true);
-  } else {
-    cb(null, false);
+    if (validation.error) {
+      cb(null, false);
+    }
   }
+  cb(null, true);
 };
 const upload = multer({ storage: multerStorage, fileFilter });
 
