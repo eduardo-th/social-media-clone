@@ -18,8 +18,12 @@ const userSchema = new Schema(
       unique: true,
     },
     avatar: {
-      url: String,
-      filename: String,
+      url: {
+        type: String,
+        default:
+          'https://res.cloudinary.com/dqfvb6su5/image/upload/v1666904254/social-media/avatars/mustache2_ptqjy3.jpg',
+      },
+      filename: { type: String, default: '' },
     },
     about: { type: String },
     posts: [
