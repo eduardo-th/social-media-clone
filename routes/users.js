@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
 const passport = require('passport');
-const upload = require('../multercloudinaryconfig');
+const { upload, cloudinary } = require('../multercloudinaryconfig');
 
 router.get('/', function (req, res, next) {
   res.render('users/register');
@@ -15,20 +15,21 @@ router.get('/:id', async (req, res) => {
 
   const foundUser = await User.findById(id);
 
-  console.log(foundUser);
-
   res.render('users/show', { foundUser });
 });
 router.patch('/:id', upload.single('image'), async (req, res) => {
-  console.log('LLEGO AL PATCH USER');
   const { id } = req.params;
   const { about } = req.body;
+  const currentAvatar = await User.findById(id, 'avatar');
   const avatar = {
-    url: req.file.path,
-    filename: req.file.filename,
+    url: req.file ? req.file.path : currentAvatar.avatar.url,
+    filename: req.file ? req.file.filename : currentAvatar.avatar.filename,
   };
 
   const foundUser = await User.findByIdAndUpdate(id, { about, avatar }, { new: true });
+  if (currentAvatar.avatar.filename !== '') {
+    const result = await cloudinary.uploader.destroy(currentAvatar.avatar.filename);
+  }
 
   res.redirect(`/users/${id}`);
 });
