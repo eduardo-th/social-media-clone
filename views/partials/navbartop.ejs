@@ -22,6 +22,7 @@
         <a class="nav-link" href="/users/login">Login</a>
         <a class="nav-link" href="/users">Register</a>
         <%} else{ %>
+          <a class="nav-link" href="/users/<%= user._id.toString() %> "><%= user.username %></a>
         <form action="/users/logout" method="POST">
           <button class="btn nav-link">Logout</button>
         </form>
