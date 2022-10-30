@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Post = require('../models/post');
 const middlewares = require('../middlewares');
-const upload = require('../multercloudinaryconfig');
+const {upload} = require('../multercloudinaryconfig');
 
 router.get('/', async (req, res) => {
   const foundPost = await Post.find().limit(10).sort({ createdAt: -1 });

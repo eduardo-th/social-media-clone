@@ -44,4 +44,4 @@ const fileFilter = (req, file, cb) => {
 };
 const upload = multer({ storage: multerStorage, fileFilter });
 
-module.exports = upload;
+module.exports = {upload,cloudinary};
