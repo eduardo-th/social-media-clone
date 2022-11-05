@@ -51,7 +51,9 @@ const userSchema = new Schema(
 );
 
 userSchema.virtual('avatar.thumbnail').get(function () {
+  if(this.avatar.url){
   return this.avatar.url.replace('/upload', '/upload/c_fill,g_faces,h_250,r_max,w_250');
+}
 });
 
 userSchema.plugin(passportLocalMongoose, pluginOptions);
