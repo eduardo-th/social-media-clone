@@ -2,7 +2,9 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
 const passport = require('passport');
+const middlewares=require('../middlewares')
 const { upload, cloudinary } = require('../multercloudinaryconfig');
+
 
 router.get('/', function (req, res, next) {
   res.render('users/register');
@@ -17,7 +19,7 @@ router.get('/:id', async (req, res) => {
 
   res.render('users/show', { foundUser });
 });
-router.patch('/:id', upload.single('image'), async (req, res) => {
+router.patch('/:id', middlewares.isLoggedIn,upload.single('image'), async (req, res) => {
   const { id } = req.params;
   const { about } = req.body;
   const currentAvatar = await User.findById(id, 'avatar');
