@@ -15,7 +15,8 @@ router.get('/login', (req, res) => {
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
 
-  const foundUser = await User.findById(id);
+  const foundUser = await User.findById(id)
+  .populate('follows followers','username avatar')  
 
   res.render('users/show', { foundUser });
 });

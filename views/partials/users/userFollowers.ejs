@@ -1,0 +1,8 @@
+<div class="row">
+    <% for(let follower of foundUser.followers) {%> 
+      <div class="col-2 mx-1 text-center"  >
+        <img class=" img-fluid" src="<%= follower.avatar.thumbnail %> " alt="">
+        <a href="/users/<%= follower.id %> "><span><%= follower.username %> </span></a>
+      </div>
+      <% } %> 
+  </div>

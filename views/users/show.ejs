@@ -14,10 +14,10 @@
     </div>  
     <div class="col-8 ms-1">
       <div class="tab-content" id="v-pills-tabContent">        
-        <div class="tab-pane  show active" id="user" role="tabpanel" tabindex="0"><%- include('../partials/users/userInfo',{foundUser}) %>  </div>
+        <div class="tab-pane  show active" id="user" role="tabpanel" tabindex="0"><%- include('../partials/users/userInfo',{foundUser}) %> </div>
         <div class="tab-pane fade" id="posts" role="tabpanel" tabindex="0">SHOW POSTS</div>
-        <div class="tab-pane fade" id="followers" role="tabpanel" tabindex="0">SHOW FOLLOWERS</div>        
-        <div class="tab-pane fade" id="follows" role="tabpanel" tabindex="0">SHOW FOLLOWS</div>          
+        <div class="tab-pane fade" id="followers" role="tabpanel" tabindex="0"><%- include('../partials/users/userfollowers',{foundUser}) %> </div>
+        <div class="tab-pane fade" id="follows" role="tabpanel" tabindex="0"><%- include('../partials/users/userfollows',{foundUser}) %> </div>
       </div>
     </div>
   </div>
