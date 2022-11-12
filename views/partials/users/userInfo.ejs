@@ -1,0 +1,12 @@
+<h1 ><%= foundUser.username %></h1>
+    <p><%= foundUser.about %> </p>      
+    <form action="/users/<%=foundUser.id%>?_method=PATCH" method="POST" enctype="multipart/form-data">
+        <textarea class="form-control" name="about" id="about" rows="3" placeholder="about you"></textarea>        
+        <label class="form-label mb-0 mt-1" for="image">Choose avatar image</label>
+        <input class="form-control" type="file" name="image" id="image">
+        <div class="row justify-content-end">    
+            <div class="col-3">
+                <button class="col-12 btn btn-sm btn-success mt-1 p-1">Change</button>
+            </div>
+        </div>
+      </form>
