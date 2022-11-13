@@ -1,0 +1,19 @@
+<div class="row justify-content-start">
+    <div class="col-auto px-0 " id="card-container">
+      <% for(let post of foundUser.posts) {%>
+      <div class="col-auto card mb-3 p-0 ">
+        <div class="row g-0">
+          <div class="col-md-1 ">
+            <img src="<%=post.image.thumbnail%>" class=" img-fluid rounded-start" alt="..." />
+          </div>
+          <div class="col-md-8">
+            <div class="card-body py-0">
+              <h5 class="card-title"><a href="/posts/<%=post.id%>"><%= post.title %></a></h5>
+              <p class="card-text mb-0 crop-text-4lines"><%= post.body %></p>              
+            </div>
+          </div>
+        </div>
+      </div>
+      <% } %>
+    </div>
+  </div>

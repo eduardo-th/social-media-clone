@@ -16,8 +16,9 @@ router.get('/:id', async (req, res) => {
   const { id } = req.params;
 
   const foundUser = await User.findById(id)
-  .populate('follows followers','username avatar')  
-
+  .populate('follows followers','username avatar')
+  .populate('posts','title image')  
+  
   res.render('users/show', { foundUser });
 });
 router.patch('/:id', middlewares.isLoggedIn,upload.single('image'), async (req, res) => {
