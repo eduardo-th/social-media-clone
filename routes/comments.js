@@ -1,47 +1,14 @@
 const express = require('express');
-const Post = require('../models/post');
-const Comment = require('../models/comment');
+
 const middlewares = require('../middlewares');
+const commentController=require('../controllers/comments')
 
 const router = express.Router({ mergeParams: true });
 
-router.post('/', middlewares.isLoggedIn, async (req, res) => {
-  const { id } = req.params;
+router.post('/', middlewares.isLoggedIn, commentController.postComment);
 
-  const commentDoc = new Comment({ author: req.user._id, body: req.body.body });
-  const foundPost = await Post.findById(id);
-  foundPost.comments.push(commentDoc);
+router.put('/:commentId',middlewares.isLoggedIn, commentController.editComment);
 
-  await Promise.all([commentDoc.save(), foundPost.save()]);
-
-  req.flash('success', 'Comment created');
-  res.redirect(`/posts/${id}`);
-});
-
-router.put('/:commentId',middlewares.isLoggedIn, async (req, res) => {
-  const { id, commentId } = req.params;
-  const { body } = req.body;
-
-  const foundComment = await Comment.findByIdAndUpdate(commentId, { body }, { new: true });
-
-  req.flash('success', 'Comment edited');
-  res.redirect(`/posts/${id}`);
-});
-
-router.delete('/:commentId', middlewares.isLoggedIn, async (req, res) => {
-  const { id, commentId } = req.params;
-
-  const deleteCommentPost = Post.findByIdAndUpdate(
-    id,
-    { $pull: { comments: commentId } },
-    { new: true }
-  ).exec();
-  const deleteComment = Comment.findByIdAndDelete(commentId).exec();
-
-  await Promise.all([deleteComment, deleteCommentPost]);
-
-  req.flash('success', 'Comment deleted');
-  res.redirect(`/posts/${id}`);
-});
+router.delete('/:commentId', middlewares.isLoggedIn, commentController.deleteComment);
 
 module.exports = router;
