@@ -31,6 +31,7 @@ if (process.env.NODE_ENV === 'production') {
   sessionConfig.cookie.secure = true;
 }
 
+const authRouter=require('./routes/auth')
 const indexRouter = require('./routes/index');
 const postsRouter = require('./routes/posts');
 const usersRouter = require('./routes/users');
@@ -60,7 +61,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
-  if (req.originalUrl !== '/users/login') {
+  if (req.originalUrl !== '/login') {
     req.session.previusUrl = req.originalUrl;
   }
   res.locals.user = req.user;
@@ -70,6 +71,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/', indexRouter);
+app.use('/login',authRouter)
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
 app.use('/posts/:id/comments', commentsRouter);
@@ -78,7 +80,7 @@ const dbUrl = 'mongodb://localhost:27017/socialMedia';
 mongoose.connect(dbUrl).catch((err) => console.log(`mongo connection error ${err}`));
 
 const db = mongoose.connection;
-db.on('error', (err) => {
+db.on('error', (err) => { 
   console.log(`mongo error ${err}`);
 });
 db.once('open', () => {
