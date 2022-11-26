@@ -30,13 +30,5 @@ router.patch('/:id', middlewares.isLoggedIn,upload.single('image'), async (req, 
 
   res.redirect(`/users/${id}`);
 });
-router.post('/logout', (req, res) => {
-  req.logout(function (err) {
-    if (err) {
-      return next(err);
-    }
-    res.redirect('/');
-  });
-});
 
 module.exports = router;

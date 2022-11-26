@@ -28,7 +28,7 @@ router.post('/register', async (req, res, next) => {
   const userDoc = new User({ username, email });
 
   const registeredUser =  await User.register(userDoc, password);  
-  
+
   if(registeredUser){
     //do this id user found
   req.login(registeredUser, function (err) {
@@ -39,6 +39,14 @@ router.post('/register', async (req, res, next) => {
   });
   }    
   res.redirect('/register')
+});
+router.post('/logout', (req, res) => {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect('/');
+  });
 });
 
 module.exports = router;
