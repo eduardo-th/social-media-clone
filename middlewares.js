@@ -17,6 +17,6 @@ module.exports.isLoggedIn = (req, res, next) => {
     next();
   } else {
     req.flash('error', 'Need to Loggin');
-    res.redirect('/users/login');
+    res.redirect('/login');
   }
 };
