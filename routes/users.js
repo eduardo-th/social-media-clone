@@ -5,12 +5,6 @@ const User = require('../models/user');
 const middlewares=require('../middlewares')
 const { upload, cloudinary } = require('../multercloudinaryconfig');
 
-
-
-router.get('/', function (req, res, next) {
-  res.render('users/register');
-});
-
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
 
@@ -35,19 +29,6 @@ router.patch('/:id', middlewares.isLoggedIn,upload.single('image'), async (req, 
   }
 
   res.redirect(`/users/${id}`);
-});
-router.post('/', async (req, res) => {
-  const { username, password, email } = req.body;
-  const userDoc = new User({ username, email });
-
-  const registeredUser = await User.register(userDoc, password);
-
-  req.login(registeredUser, function (err) {
-    if (err) {
-      return next(err);
-    }
-    return res.redirect('/');
-  });
 });
 router.post('/logout', (req, res) => {
   req.logout(function (err) {

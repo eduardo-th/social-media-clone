@@ -71,7 +71,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/', indexRouter);
-app.use('/login',authRouter)
+app.use('/',authRouter)
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
 app.use('/posts/:id/comments', commentsRouter);
