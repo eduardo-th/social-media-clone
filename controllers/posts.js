@@ -48,7 +48,7 @@ module.exports.createNewPost = async (req, res) => {
     foundDoc.save()
   });
   
-  res.redirect('/');
+  res.redirect(`/posts/${postDoc.id}`);
 };
 module.exports.editPost = async (req, res) => {
   const { id } = req.params;
