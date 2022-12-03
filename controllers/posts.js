@@ -1,4 +1,5 @@
 const Post = require('../models/post');
+const User = require('../models/user');
 
 module.exports.getIndexPost = async (req, res) => {
   const foundPost = await Post.find().limit(10).sort({ createdAt: -1 });
@@ -41,6 +42,12 @@ module.exports.createNewPost = async (req, res) => {
     image,
   });
   await postDoc.save();
+
+  User.findById(req.user.id, (err, foundDoc) => {
+    foundDoc.posts.push(postDoc._id);    
+    foundDoc.save()
+  });
+  
   res.redirect('/');
 };
 module.exports.editPost = async (req, res) => {
