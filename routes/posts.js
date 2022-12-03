@@ -16,6 +16,6 @@ router.post(
   middlewares.validatePost,
   postController.createNewPost
 );
-router.patch('/:id', middlewares.isLoggedIn, postController.editPost);
-router.delete('/:id', middlewares.isLoggedIn, postController.deletePost);
+router.patch('/:id',middlewares.isLoggedIn, middlewares.isAuthor, postController.editPost);
+router.delete('/:id', middlewares.isLoggedIn, middlewares.isAuthor, postController.deletePost);
 module.exports = router;

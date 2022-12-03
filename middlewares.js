@@ -1,3 +1,4 @@
+const Post = require('./models/post');
 const { postValidSchema } = require('./validationschemas');
 
 module.exports.validatePost = (req, res, next) => {
@@ -19,4 +20,14 @@ module.exports.isLoggedIn = (req, res, next) => {
     req.flash('error', 'Need to Loggin');
     res.redirect('/login');
   }
+};
+
+module.exports.isAuthor = async (req, res, next) => {
+  const { id } = req.params;
+  const foundPost = await Post.findById(id);
+  if (req.user._id.equals(foundPost.author)) {
+    return next();
+  }
+  req.flash('success', `Don't have permission to do that`);
+  res.redirect('/');
 };
