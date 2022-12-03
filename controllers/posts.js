@@ -30,8 +30,8 @@ module.exports.getEditPost = async (req, res) => {
 module.exports.createNewPost = async (req, res) => {
   const { title, body, tags } = req.body;
   const image = {
-    url: req.file.path,
-    filename: req.file.filename,
+    url: req.file ? req.file.path : '',
+    filename: req.file ? req.file.filename : '',
   };
   const postDoc = new Post({
     title,
