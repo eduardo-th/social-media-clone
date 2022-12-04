@@ -1,4 +1,5 @@
 const Post = require('./models/post');
+const Comment =require('./models/comment')
 const { postValidSchema } = require('./validationschemas');
 
 module.exports.validatePost = (req, res, next) => {
@@ -26,6 +27,16 @@ module.exports.isAuthor = async (req, res, next) => {
   const { id } = req.params;
   const foundPost = await Post.findById(id);
   if (req.user._id.equals(foundPost.author)) {
+    return next();
+  }
+  req.flash('success', `Don't have permission to do that`);
+  res.redirect('/');
+};
+
+module.exports.isCommentAuthor = async (req, res, next) => {
+  const { commentId } = req.params;  
+  const foundComment = await Comment.findById(commentId);  
+  if (req.user._id.equals(foundComment.author)) {  
     return next();
   }
   req.flash('success', `Don't have permission to do that`);
