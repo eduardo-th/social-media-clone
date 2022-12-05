@@ -1,7 +1,9 @@
-<% if(error && error.length) { %>
+<% if(error && error.length) { console.log(error)%>
 <div class="col-6 offset-3 fixed-bottom">
   <div class="mb-0 text-center alert alert-danger alert-dismissible fade show" role="alert">
-    <strong><%=error[0]%></strong>
+    <% error.forEach((elem) =>{%>
+      <strong><%=elem%></strong> <br>
+    <% }) %>     
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
 </div>
