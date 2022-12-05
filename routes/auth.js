@@ -2,6 +2,7 @@ const express = require('express');
 const passport = require('passport');
 const User = require('../models/user');
 const authController=require('../controllers/auth')
+const {validateUserRegistration}=require('../middlewares')
 
 const router = express.Router();
 
@@ -16,7 +17,7 @@ router.post(
   }),
   authController.postLogin
 );
-router.post('/register', authController.postRegister);
+router.post('/register', validateUserRegistration, authController.postRegister);
 router.post('/logout', authController.postLogout);
 
 module.exports = router;

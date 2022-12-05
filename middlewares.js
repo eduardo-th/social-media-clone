@@ -1,6 +1,6 @@
 const Post = require('./models/post');
-const Comment =require('./models/comment')
-const { postValidSchema } = require('./validationschemas');
+const Comment = require('./models/comment');
+const { postValidSchema, registerUserValidation } = require('./validationschemas');
 
 module.exports.validatePost = (req, res, next) => {
   const { title, body } = req.body;
@@ -34,11 +34,24 @@ module.exports.isAuthor = async (req, res, next) => {
 };
 
 module.exports.isCommentAuthor = async (req, res, next) => {
-  const { commentId } = req.params;  
-  const foundComment = await Comment.findById(commentId);  
-  if (req.user._id.equals(foundComment.author)) {  
+  const { commentId } = req.params;
+  const foundComment = await Comment.findById(commentId);
+  if (req.user._id.equals(foundComment.author)) {
     return next();
   }
   req.flash('success', `Don't have permission to do that`);
   res.redirect('/');
+};
+
+module.exports.validateUserRegistration = (req, res, next) => {
+  const validation = registerUserValidation.validate(req.body);
+
+  if (!validation.error) {
+    return next();
+  }
+  for (let error of validation.error.details) {
+    req.flash('error', `${error.message}`);
+  }
+
+  res.redirect('/register');
 };
