@@ -2,7 +2,7 @@
 <div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-6">
-      <form action="/posts" method="POST" enctype="multipart/form-data">
+      <form action="/posts" method="POST" id="form" enctype="multipart/form-data">
         <label class="form-label mb-1" for="title">Title</label>
         <input class="form-control" type="text" name="title" id="title" />
         <label class="form-label mb-1" for="body">Body</label>
@@ -11,6 +11,9 @@
         <input class="form-control" type="file" name="image" id="image" />
         <label class="form-label mb-1" for="tags">Add Tags</label>
         <input class="form-control" type="text" name="tags" id="tags" />
+        <div id="tagContainer">
+          <!-- ----TAGS----- -->
+        </div>
         <div class="d-grid gap-2">
           <button class="btn btn-success mt-1">Send</button>
         </div>
@@ -18,3 +21,4 @@
     </div>
   </div>
 </div>
+<script src="/javascripts/newPost.js" ></script>
