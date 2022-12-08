@@ -10,7 +10,9 @@ module.exports.validatePost = (req, res, next) => {
   if (!validation.error) {
     return next();
   }
-  req.flash('error', validation.error.message);
+  for (let error of validation.error.details) {
+    req.flash('error', `${error.message}`);
+  }  
   res.redirect('/posts/new');
 };
 
