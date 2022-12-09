@@ -1,3 +1,5 @@
+const User = require('../models/user');
+
 module.exports.getLogin = (req, res) => {
   res.render('auth/login');
 };
@@ -10,6 +12,7 @@ module.exports.postLogin = (req, res) => {
   res.redirect(redirectUrl);
 };
 module.exports.postRegister = async (req, res, next) => {
+  console.log(req.body)
   const { username, password, email } = req.body;
   const userDoc = new User({ username, email });
 
