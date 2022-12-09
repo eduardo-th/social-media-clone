@@ -3,16 +3,17 @@ const Comment = require('./models/comment');
 const { postValidSchema, registerUserValidation } = require('./validationschemas');
 
 module.exports.validatePost = (req, res, next) => {
-  const { title, body } = req.body;
+  const { title, body, tags:tagList } = req.body;
+  tags = tagList.split(',');
 
-  const validation = postValidSchema.validate({ title, body });
+  const validation = postValidSchema.validate({ title, body, tags });
 
   if (!validation.error) {
     return next();
   }
   for (let error of validation.error.details) {
     req.flash('error', `${error.message}`);
-  }  
+  }
   res.redirect('/posts/new');
 };
 
