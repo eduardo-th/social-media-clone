@@ -11,8 +11,7 @@ module.exports.postLogin = (req, res) => {
   req.flash('success', `Welcome back ${req.body.username}`);
   res.redirect(redirectUrl);
 };
-module.exports.postRegister = async (req, res, next) => {
-  console.log(req.body)
+module.exports.postRegister = async (req, res, next) => {  
   const { username, password, email } = req.body;
   const userDoc = new User({ username, email });
 
@@ -20,14 +19,14 @@ module.exports.postRegister = async (req, res, next) => {
 
   if (registeredUser) {
     //do this id user found
-    req.login(registeredUser, function (err) {
+    return req.login(registeredUser, function (err) {
       if (err) {
-        return next(err);
+         next(err);
       }
-      return res.redirect('/');
+       res.redirect('/');
     });
   }
-  res.redirect('/register');
+  res.redirect('/register');  
 };
 module.exports.postLogout = (req, res) => {
   req.logout(function (err) {
