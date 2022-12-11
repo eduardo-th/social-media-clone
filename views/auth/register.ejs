@@ -1,18 +1,39 @@
 <% layout('./layout/boilerplate') %>
 <div class="container-fluid">
   <div class="row justify-content-center">
-    <form class="col-6" action="/register" method="POST">
-      <label class="form-label mb-1" for="username">Username</label>
-      <input class="form-control" type="text" name="username" id="username" />
-      <label class="form-label mb-1" for="password">Password</label>
-      <input class="form-control" type="password" name="password" id="password" />
-      <label class="form-label mb-1" for="confirmPassword">Confirm Password</label>
-      <input class="form-control" type="password" name="confirmPassword" id="confirmPassword" />
-      <label class="form-label mb-1" for="email">Email</label>
-      <input class="form-control" type="email" name="email" id="email" />
+    <form class="col-6" action="/register" method="POST" id="form" novalidate>
+      <div>
+        <label class="form-label mb-1" for="username">Username</label>
+        <input class="form-control" type="text" name="username" id="username" required minlength="3" maxlength="20"/>
+        <div class="invalid-feedback">
+          username must have 3 to 20 characters
+        </div>
+      </div>
+      <div>
+        <label class="form-label mb-1" for="password">Password</label>
+        <input class="form-control" type="password" name="password" id="password" required minlength="8" maxlength="20"/>
+        <div class="invalid-feedback">
+          password must have 8 to 20 characters
+        </div>
+      </div>
+      <div>
+        <label class="form-label mb-1" for="confirmPassword">Confirm Password</label>
+        <input class="form-control" type="password" name="confirmPassword" id="confirmPassword" required minlength="8" maxlength="20"/>
+        <div class="invalid-feedback">
+          must be same as password
+        </div>
+      </div>
+      <div>
+        <label class="form-label mb-1" for="email">Email</label>
+        <input class="form-control" type="email" name="email" id="email" required/>
+        <div class="invalid-feedback">
+          must be valid email
+        </div>
+      </div>
       <div class="d-grid gap-2">
         <button class="btn btn-success mt-1">Register</button>
       </div>
     </form>
   </div>
 </div>
+<script src="/javascripts/register.js"></script>
