@@ -2,16 +2,36 @@
 <div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-6">
-      <form action="/posts" method="POST" id="form" enctype="multipart/form-data">
-        <label class="form-label mb-1" for="title">Title</label>
-        <input class="form-control" type="text" name="title" id="title" />
+      <form action="/posts" method="POST" id="form" enctype="multipart/form-data" novalidate>
+        <div>
+          <label class="form-label mb-1" for="title">Title</label>
+          <input class="form-control" type="text" name="title" id="title" required minlength="3" maxlength="50" />
+          <div class="invalid-feedback">
+            title must be 3 to 50 characters
+          </div>
+      </div>
+      <div>
         <label class="form-label mb-1" for="body">Body</label>
-        <textarea class="form-control" name="body" id="body" cols="30" rows="3"></textarea>                
+        <textarea class="form-control" name="body" id="body" cols="30" required rows="3" minlength="3" maxlength="1000"></textarea>
+        <div class="invalid-feedback">
+          body must be 3 to 1000 characters
+        </div>
+      </div>
+      <div>
         <label class="form-label mb-1" for="tags">Add Tags</label>
-        <input class="form-control " type="text" name="tags" id="tags" />
+        <input class="form-control " type="text" name="tags" id="tags"/>
+        <div class="invalid-feedback">
+          tag must be 3 to 20 characters min 1 tag max 10 tags
+        </div>
+      </div>
+      <div>
         <div id="tagContainer">
           <!-- ----TAGS----- -->
         </div>
+        <div class="invalid-feedback">
+          min 1 tag max 10 tags
+        </div>
+      </div>
         <label class="form-label mb-1" for="image">Image</label>
         <input class="form-control" type="file" name="image" id="image" />        
         <div class="d-grid gap-2">
@@ -21,4 +41,4 @@
     </div>
   </div>
 </div>
-<script src="/javascripts/newPost.js" ></script>
+<script type="module" src="/javascripts/newPost.js" ></script>
