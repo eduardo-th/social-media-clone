@@ -37,7 +37,7 @@ module.exports.createNewPost = async (req, res) => {
   const postDoc = new Post({
     title,
     body,
-    tags: tags.split(' '),
+    tags: tags.split(','),
     author: req.user._id,
     image,
   });
@@ -56,7 +56,7 @@ module.exports.editPost = async (req, res) => {
   const editedPost = {
     title,
     body,
-    tags: tags.split(' '),
+    tags: tags.split(','),
   };
   const foundDoc = await Post.findByIdAndUpdate(id, editedPost);
   res.redirect(`/posts/${id}`);
