@@ -32,7 +32,7 @@ module.exports.isAuthor = async (req, res, next) => {
   if (req.user._id.equals(foundPost.author)) {
     return next();
   }
-  req.flash('success', `Don't have permission to do that`);
+  req.flash('error', `Don't have permission to do that`);
   res.redirect('/');
 };
 
