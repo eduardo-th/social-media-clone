@@ -7,7 +7,7 @@ const postController = require('../controllers/posts');
 router.get('/', postController.getIndexPost);
 router.get('/new', middlewares.isLoggedIn, postController.getNewPost);
 router.get('/:id', postController.getShowPost);
-router.get('/:id/edit', middlewares.isLoggedIn, postController.getEditPost);
+router.get('/:id/edit', middlewares.isLoggedIn, middlewares.isAuthor, postController.getEditPost);
 
 router.post(
   '/',
