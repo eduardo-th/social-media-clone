@@ -4,7 +4,7 @@
     <form class="col-6" action="/posts/<%=id%>?_method=PATCH" id="form" method="POST" novalidate>
       <div>
       <label class="form-label mb-1" for="title">Title</label>
-      <input class="form-control" type="text" name="title" id="title" value="<%= title %> " required minlength="3" maxlength="50"/>
+      <input class="form-control" type="text" name="title" id="title" value="<%= title %>" required minlength="3" maxlength="50"/>
       <div class="invalid-feedback">
         title must be 3 to 50 characters
       </div>
@@ -29,7 +29,7 @@
       <div id="tagContainer">
         <!-- ----TAGS----- -->
         <% for (let tag of tags) { %>
-          <div class="col-auto badge text-bg-dark p-0 ps-1 me-1" >            
+          <div class="col-auto badge text-bg-dark p-0 ps-1 me-1" >
             <span><%= tag %></span>
             <button class="btn-close btn-close-white align-middle"></button>
           </div>

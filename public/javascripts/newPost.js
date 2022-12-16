@@ -52,7 +52,7 @@ form.addEventListener('submit', (event) => {
   if (!countTags() || !form.checkValidity()) {
     event.preventDefault();
   } else {
-    const allTags = document.querySelectorAll('.badge');
+    const allTags = document.querySelectorAll('.badge span');
     const arrTags = [];
     allTags.forEach((tag) => {
       arrTags.push(tag.textContent);
