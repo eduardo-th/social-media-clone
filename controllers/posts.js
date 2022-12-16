@@ -1,5 +1,6 @@
 const Post = require('../models/post');
 const User = require('../models/user');
+const {cloudinary}=require('../multercloudinaryconfig')
 
 module.exports.getIndexPost = async (req, res) => {
   const foundPost = await Post.find().limit(10).sort({ createdAt: -1 });
@@ -63,7 +64,10 @@ module.exports.editPost = async (req, res) => {
 };
 module.exports.deletePost = async (req, res) => {
   const { id } = req.params;
-  const foundDoc = await Post.findByIdAndDelete(id);
-
+  const foundDoc = await Post.findByIdAndDelete(id);  
+  
+  if(foundDoc.image.filename){
+    cloudinary.uploader.destroy(foundDoc.image.filename)    
+  }
   res.redirect('/');
 };
