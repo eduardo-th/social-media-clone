@@ -1,7 +1,9 @@
 const express = require('express');
 const passport = require('passport');
+
 const authController=require('../controllers/auth')
 const {validateUserRegistration}=require('../middlewares')
+const wrapAsyncError=require('../utils/wrapAsyncError')
 
 const router = express.Router();
 
@@ -16,7 +18,7 @@ router.post(
   }),
   authController.postLogin
 );
-router.post('/register', validateUserRegistration, authController.postRegister);
+router.post('/register', validateUserRegistration, wrapAsyncError(authController.postRegister));
 router.post('/logout', authController.postLogout);
 
 module.exports = router;
