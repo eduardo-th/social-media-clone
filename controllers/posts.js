@@ -19,6 +19,10 @@ module.exports.getShowPost = async (req, res) => {
       populate: { path: 'author', select: 'username', ref: 'User' },
     });
 
+  if(!foundPost){
+    req.flash('error','post not found')
+    return res.redirect('/posts')
+  }
   if (req.user) {
     userComment = foundPost.comments.find((elem) => elem.author._id.equals(req.user._id));
   }
