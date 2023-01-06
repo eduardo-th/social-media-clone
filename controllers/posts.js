@@ -1,10 +1,19 @@
 const Post = require('../models/post');
 const User = require('../models/user');
-const {cloudinary}=require('../multercloudinaryconfig')
+const { cloudinary } = require('../multercloudinaryconfig');
 
 module.exports.getIndexPost = async (req, res) => {
   const foundPost = await Post.find().limit(10).sort({ createdAt: -1 });
   res.render('posts/index', { foundPost });
+};
+module.exports.getFeedPostData = async (req, res) => {  
+  let page = 0 || req.query.page;
+  const itemsPerPage = 10;
+  const foundPost = await Post.find()
+    .skip(page * itemsPerPage)
+    .limit(itemsPerPage)
+    .sort({ createdAt: -1 });
+  res.send({ foundPost });
 };
 module.exports.getNewPost = (req, res) => {
   res.render('posts/new');

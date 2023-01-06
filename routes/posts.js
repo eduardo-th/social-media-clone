@@ -8,6 +8,7 @@ const wrapAsyncError=require('../utils/wrapAsyncError')
 
 router.get('/', wrapAsyncError(postController.getIndexPost));
 router.get('/new', middlewares.isLoggedIn, postController.getNewPost);
+router.get('/feed', wrapAsyncError(postController.getFeedPostData));
 router.get('/:id', wrapAsyncError(postController.getShowPost));
 router.get('/:id/edit', middlewares.isLoggedIn, middlewares.isAuthor, wrapAsyncError(postController.getEditPost));
 
