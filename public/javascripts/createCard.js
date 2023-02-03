@@ -13,7 +13,7 @@ export const createCard = (post) => {
   card.classList.add('card', 'mb-3', 'p-0');
   row.classList.add('row', 'g-0');
   imgCol.classList.add('col-md-4');
-  img.classList.add('img-fluid', 'rounded-start');
+  img.classList.add('img-fluid', 'rounded','w-100');
   img.src = post.image.thumbnail;
 
   bodyCol.classList.add('col-md-8');
