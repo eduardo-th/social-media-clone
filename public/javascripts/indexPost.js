@@ -9,7 +9,7 @@ async function getPosts(url, params) {
   return response.data.foundPost;
 }
 window.onscroll = function (ev) {
-  if (window.innerHeight + window.scrollY >= document.body.offsetHeight && moreData) {
+  if (window.innerHeight + window.scrollY >= document.body.offsetHeight-5 && moreData) {
     let params = { page: currentPage + 1 };
 
     getPosts(url, params)
