@@ -10,6 +10,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const methodOverride = require('method-override');
 const flash = require('connect-flash');
+const mongoSanitize = require('express-mongo-sanitize')
 
 const User = require('./models/user');
 
@@ -51,6 +52,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session(sessionConfig));
 app.use(flash());
+app.use(mongoSanitize({  
+  replaceWith: '_',
+}))
 
 app.use(passport.initialize());
 app.use(passport.authenticate('session')); // == app.use(passport.session());
