@@ -23,7 +23,8 @@ const sessionConfig = {
   //store: change to mongo for deploy
   saveUninitialized: true,
   cookie: {
-    secure: false,
+    name:'session',
+    secure: app.get('env') === 'development' ? false : true,
     httpOnly: true,
     maxAge: 7 * 24 * 60 * 60 * 1000,
   },
