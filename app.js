@@ -10,7 +10,8 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const methodOverride = require('method-override');
 const flash = require('connect-flash');
-const mongoSanitize = require('express-mongo-sanitize')
+const mongoSanitize = require('express-mongo-sanitize');
+const helmet = require('helmet');
 
 const User = require('./models/user');
 
@@ -45,6 +46,26 @@ app.engine('ejs', engine);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(
+  helmet({
+    crossOriginEmbedderPolicy: false,
+  })
+);
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: [],
+      connectSrc: ["'self'"],
+      scriptSrc: ["'unsafe-inline'", "'self'", 'https://unpkg.com/'],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      workerSrc: ["'self'", 'blob:'],
+      objectSrc: [],
+      imgSrc: ["'self'", 'blob:', 'data:', 'https://res.cloudinary.com/dqfvb6su5/'],
+      fontSrc: ["'self'"],
+    },
+  })
+);
+
 app.use(morgan('dev'));
 app.use(methodOverride('_method'));
 app.use(express.json());
@@ -55,7 +76,8 @@ app.use(session(sessionConfig));
 app.use(flash());
 app.use(mongoSanitize({  
   replaceWith: '_',
-}))
+}));
+
 
 app.use(passport.initialize());
 app.use(passport.authenticate('session')); // == app.use(passport.session());
