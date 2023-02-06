@@ -1,6 +1,7 @@
 const form = document.querySelector('#form');
 const tagContainer = document.querySelector('#tagContainer');
 const tagInput = document.querySelector('#tags');
+const textArea=document.querySelector('#body')
 
 function createTag(tagText) {
   const tagElem = document.createElement('div');
@@ -63,7 +64,7 @@ form.addEventListener('submit', (event) => {
 });
 form.addEventListener('keydown', (event) => {
   event.stopPropagation();
-  if (event.keyCode === 13) {
+  if (event.keyCode === 13 && event.target != textArea) {
     event.preventDefault();
   }
 });
