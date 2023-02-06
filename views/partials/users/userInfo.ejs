@@ -1,5 +1,8 @@
 <h1 ><%= foundUser.username %></h1>
-    <p><%= foundUser.about %> </p>      
+    <p><%= foundUser.about %> </p>
+    <% console.log(`USER ${user} ---------------\nFOUNDUSER ${foundUser}`)%>
+
+    <% if( user && user.id === foundUser.id) {%>
     <form action="/users/<%=foundUser.id%>?_method=PATCH" method="POST" enctype="multipart/form-data">
         <textarea class="form-control" name="about" id="about" rows="3" placeholder="about you"></textarea>        
         <label class="form-label mb-0 mt-1" for="image">Choose avatar image</label>
@@ -10,3 +13,4 @@
             </div>
         </div>
       </form>
+      <% } %> 
