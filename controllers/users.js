@@ -1,6 +1,17 @@
 const User = require('../models/user');
 const { upload, cloudinary } = require('../multercloudinaryconfig');
 
+module.exports.unfollowUser = async (req, res) => {
+  const { userId } = req.body;
+  const followerId = req.user.id;
+
+  const updateUser = User.findByIdAndUpdate(userId, { $pull: { followers: followerId } });
+  const updateFollower = User.findByIdAndUpdate(followerId, { $pull: { follows: userId } });
+  await Promise.all([updateUser, updateFollower]);
+
+  res.status(200).send();
+}
+
 module.exports.followUser = async (req, res) => {
   const { userId } = req.body;
   const followerId = req.user.id;
