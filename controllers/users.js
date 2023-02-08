@@ -19,12 +19,17 @@ module.exports.followUser = async (req, res) => {
 };
 module.exports.getShowUser = async (req, res) => {
   const { id } = req.params;
+  let isFollower = false;
+  if (req.user) {
+    const { followers } = await User.findById(id).select('followers');
+    isFollower = followers.includes(req.user._id);
+  }
 
   const foundUser = await User.findById(id)
     .populate('follows followers', 'username avatar')
     .populate('posts', 'title image');
 
-  res.render('users/show', { foundUser });
+  res.render('users/show', { foundUser, isFollower });
 };
 module.exports.editUserInfo = async (req, res) => {
   const { id } = req.params;

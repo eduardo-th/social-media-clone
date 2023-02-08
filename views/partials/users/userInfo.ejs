@@ -11,9 +11,13 @@
             </div>
         </div>
       </form>
-      <% } else {%>
+      <% }%> 
+      <% if (isFollower){%>
+        <button class="btn btn-primary " id="unfollowBtn">Unfollow User</button>
+      <% } else{%>
         <button class="btn btn-primary <%= user ? '': 'disabled' %> " id="followBtn">Follow User</button>
       <% } %>
+      
         
         <% if(user) {%>
         <script>
