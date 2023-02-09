@@ -78,11 +78,13 @@ module.exports.editPost = async (req, res) => {
 };
 module.exports.deletePost = async (req, res) => {
   const { id } = req.params;
-  
+  const userId = req.user;
+
   const foundPost = await Post.findById(id);
   const deletePost = Post.findByIdAndDelete(id);  
   const deleteComments = Comment.deleteMany({ _id: { $in: foundPost.comments } });
-  const [foundDoc] = await Promise.all([deletePost, deleteComments]);
+  const updateUser = User.findByIdAndUpdate(userId, { $pull: { posts: id } });
+  const [foundDoc] = await Promise.all([deletePost, deleteComments, updateUser]);
 
   if (foundDoc.image.filename) {
     cloudinary.uploader.destroy(foundDoc.image.filename);
