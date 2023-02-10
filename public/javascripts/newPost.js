@@ -3,6 +3,16 @@ const tagContainer = document.querySelector('#tagContainer');
 const tagInput = document.querySelector('#tags');
 const textArea=document.querySelector('#body')
 
+const fileInput = document.querySelector('input[type=file]');
+const previewImg = document.querySelector('#previewImg');
+
+fileInput.addEventListener('change', (event) => {
+  const [imgFile] = fileInput.files;
+  const imgFileUrl = URL.createObjectURL(imgFile);
+
+  previewImg.src = imgFileUrl;
+});
+
 function createTag(tagText) {
   const tagElem = document.createElement('div');
   const span = document.createElement('span');
