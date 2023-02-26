@@ -1,4 +1,4 @@
-<% layout('./layout/boilerplate') -%> <% const {id,title,body,author,image,comments}=foundPost %>
+<% layout('./layout/boilerplate') -%> <% const {id,title,body,author,image,comments,tags}=foundPost %>
 <div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-md-6 col-12">
@@ -11,7 +11,13 @@
         </div>
         <div class="card-footer">
           <div class="row">
-            <div class="col-auto lh-lg">like placeholder</div>
+            <div class="col-12 lh-lg">
+              <% for (tag of tags) {%>
+              <div class="col-auto badge text-bg-dark">
+                <a class="text-bg-dark" href="/tag/<%= tag %>"><%= tag %></a>                
+              </div>
+              <% } %>
+            </div>
             <% if(user && (user._id.equals(author._id))) {%>               
               <div class="ms-auto col-auto btn-group dropup">
                 <button
