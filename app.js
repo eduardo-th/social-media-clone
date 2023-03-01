@@ -39,6 +39,7 @@ const indexRouter = require('./routes/index');
 const postsRouter = require('./routes/posts');
 const usersRouter = require('./routes/users');
 const commentsRouter = require('./routes/comments');
+const tagsRouter = require('./routes/tags')
 
 const engine = require('ejs-mate');
 app.engine('ejs', engine);
@@ -102,8 +103,9 @@ app.use('/',authRouter)
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
 app.use('/posts/:id/comments', commentsRouter);
+app.use('/tag',tagsRouter)
 
-const dbUrl = 'mongodb://localhost:27017/socialMedia';
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/socialMedia';
 mongoose.connect(dbUrl).catch((err) => console.log(`mongo connection error ${err}`));
 
 const db = mongoose.connection;

@@ -1,0 +1,28 @@
+<% layout('./layout/boilerplate') -%>
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-11 px-0" id="card-container">
+      <% for(let post of foundPost) {%>
+      <div class="card mb-3 p-0">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="<%=post.image.thumbnail%>" class="w-100 img-fluid rounded" alt="..." />
+          </div>
+          <div class="col-md-8">
+            <div class="card-body py-0">
+              <h5 class="card-title"><a href="/posts/<%=post.id%>"><%= post.title %></a></h5>
+              <p class="card-text mb-0 crop-text-4lines"><%= post.body %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% } %>
+    </div>
+  </div>
+  <div class="row justify-content-center text-center">
+    <div class="col-md-6 col-11 alert alert-secondary d-none">SORRY NO MORE POSTS</div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="module" src="/javascripts/indexPost.js"></script>
