@@ -1,8 +1,17 @@
 import { createCard } from './createCard.js';
 
+
+const path = window.location.pathname
+let tagUrl = null;
+
+if ( path.split('/').includes('tag') ){  
+tagUrl = path+'/feed'
+}
+
+
 let currentPage = 0;
 let moreData = true;
-const url = '/posts/feed';
+const url = tagUrl || '/posts/feed';
 
 async function getPosts(url, params) {
   const response = await axios.get(url, { params });
