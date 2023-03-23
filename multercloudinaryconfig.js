@@ -34,7 +34,6 @@ const fileFilter = (req, file, cb) => {
   if (req.originalUrl.includes('posts')) {
     const { title, body, tags:tagList } = req.body;    
     tags = tagList.split(',');
-    
     const validation = postValidSchema.validate({ title, body, tags });
 
     if (validation.error) {
@@ -43,6 +42,6 @@ const fileFilter = (req, file, cb) => {
   }
   cb(null, true);
 };
-const upload = multer({ storage: multerStorage, fileFilter });
+const upload = multer({ storage: multerStorage, limits: { fileSize: 5000000 },fileFilter });
 
 module.exports = {upload,cloudinary};
