@@ -12,6 +12,7 @@ const methodOverride = require('method-override');
 const flash = require('connect-flash');
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
+const multer = require('multer')
 
 const User = require('./models/user');
 
@@ -128,6 +129,13 @@ app.use(function (req, res, next) {
 // error handler
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development
+  if (err instanceof multer.MulterError) {
+    req.flash('error', err.message);
+    if (req.originalUrl.includes('users')) {
+      return res.redirect(`/users/${req.user.id}`);
+    }
+    return res.redirect('/posts/new');
+  }
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
