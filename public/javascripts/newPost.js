@@ -35,7 +35,7 @@ function isValidTag(tag) {
 }
 function countTags() {
   const allTags = document.querySelectorAll('.badge');
-  if (allTags.length >= 3 && allTags.length <= 10) {
+  if (allTags.length >= 1 && allTags.length <= 10) {
     tagContainer.classList.remove('is-invalid');
     return true;
   } else {
