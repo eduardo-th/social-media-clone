@@ -17,10 +17,12 @@ async function getPosts(url, params) {
   const response = await axios.get(url, { params });
   return response.data.foundPost;
 }
-window.onscroll = function (ev) {
+
+window.onscroll = infiniteScroll
+function  infiniteScroll(ev) {
   if (window.innerHeight + window.scrollY >= document.body.offsetHeight-5 && moreData) {
     let params = { page: currentPage + 1 };
-
+    window.onscroll=null
     getPosts(url, params)
       .then((posts) => {
         posts.forEach((post) => {
@@ -31,6 +33,7 @@ window.onscroll = function (ev) {
           moreData = false;
         }
         currentPage++;
+        window.onscroll = infiniteScroll
       })
       .catch((err) => console.log(err.message));
   }
