@@ -9,3 +9,7 @@ a {
   display: -webkit-box;
   -webkit-box-orient: vertical;
 }
+.navbar-brand img {
+  width: 2rem;
+  height: 2rem;
+}
