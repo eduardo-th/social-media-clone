@@ -35,9 +35,10 @@ const fileFilter = (req, file, cb) => {
     const { title, body, tags:tagList } = req.body;    
     tags = tagList.split(',');
     const validation = postValidSchema.validate({ title, body, tags });
+    console.log(file.mimetype)
     if (
-      file.mimetype !== 'image/jpg' ||
-      file.mimetype !== 'image/png' ||
+      file.mimetype !== 'image/jpg' &&
+      file.mimetype !== 'image/png' &&
       file.mimetype !== 'image/jpeg'
     ) {
       const err = new multer.MulterError();
