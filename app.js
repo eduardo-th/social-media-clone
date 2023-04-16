@@ -90,7 +90,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
-  if (req.originalUrl !== '/login') {
+  if (req.originalUrl !== '/login' && !req.originalUrl.includes('feed')) {
     req.session.previusUrl = req.originalUrl;
   }
   res.locals.user = req.user;
