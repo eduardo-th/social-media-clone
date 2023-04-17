@@ -23,7 +23,9 @@ const sessionConfig = {
   name: 'sessid',
   secret: process.env.SESSION_SECRET,
   resave: false,
-  //store: change to mongo for deploy
+  store: MongoStore.create({
+    mongoUrl: process.env.DB_URL || 'mongodb://localhost:27017/socialMedia'
+  }),
   saveUninitialized: true,
   cookie: {
     name:'session',
