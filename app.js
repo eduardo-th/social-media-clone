@@ -29,6 +29,7 @@ const sessionConfig = {
   saveUninitialized: true,
   cookie: {
     name:'session',
+    sameSite:'strict',
     secure: app.get('env') === 'development' ? false : true,
     httpOnly: true,
     maxAge: 7 * 24 * 60 * 60 * 1000,
@@ -48,6 +49,7 @@ const tagsRouter = require('./routes/tags')
 const engine = require('ejs-mate');
 app.engine('ejs', engine);
 
+app.set('trust proxy', 1)
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
