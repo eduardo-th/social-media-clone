@@ -10,8 +10,9 @@ if (unfollowBtn){
     fetchRequest('/unfollow')
   })
 }
-function fetchRequest(path){  
-  fetch(`http://localhost:3000/users${path}`, {
+function fetchRequest(path){
+  const domain=`https://${window.location.hostname}`  
+  fetch(`${domain}/users${path}`, {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify({ userId: userId }),
