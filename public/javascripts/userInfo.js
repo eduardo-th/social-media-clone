@@ -11,7 +11,8 @@ if (unfollowBtn){
   })
 }
 function fetchRequest(path){
-  const domain=`https://${window.location.hostname}`  
+  const domain=`https://${window.location.hostname}`
+  
   fetch(`${domain}/users${path}`, {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
